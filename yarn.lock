@@ -499,7 +499,7 @@
   dependencies:
     "tslib" "^2.4.0"
 
-"@tabler/icons@^1.68.0":
+"@tabler/icons@^1.68.0", "@tabler/icons@^1.96.0":
   "integrity" "sha512-ZAQ64CHi5sOFQE7COoBmZbhIBtTX+4XNuiVZsr8kcqJX1bmrw6dFU0W9ONJamt/2TO997uVfSqxr2o0WZqZr/g=="
   "resolved" "https://registry.npmjs.org/@tabler/icons/-/icons-1.96.0.tgz"
   "version" "1.96.0"

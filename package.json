@@ -24,6 +24,7 @@
     "@mantine/prism": "^5.3.0",
     "@mantine/rte": "^5.3.0",
     "@mantine/spotlight": "^5.3.0",
+    "@tabler/icons": "^1.96.0",
     "dayjs": "^1.11.5",
     "embla-carousel-react": "^7.0.3",
     "next": "12.3.0",

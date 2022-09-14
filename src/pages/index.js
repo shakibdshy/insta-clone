@@ -12,7 +12,7 @@ export default function Home() {
           <Story />
           <Post />
         </div>
-        <PrimarySidebar />
+        {/* <PrimarySidebar /> */}
       </main>
     </>
   )
