@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <Container size={856}>
         <main>
-          <Group align='flex-start'>
+          <Group align='flex-start' position="center">
             <div style={{ maxWidth: '470px' }}>
               <Story />
               <Post />

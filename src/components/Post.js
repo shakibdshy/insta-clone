@@ -1,15 +1,27 @@
-import { Avatar, Button, Grid, Group, Image, Input, MediaQuery, Text } from '@mantine/core'
-import { IconDots, IconMessages, IconShare, IconThumbUp } from '@tabler/icons'
+import { Avatar, Button, createStyles, Grid, Group, Image, Input, MediaQuery, Text, Tooltip, useMantineColorScheme } from '@mantine/core'
+import { IconAlertCircle, IconAt, IconBookmark, IconDots, IconHeart, IconMessageCircle2, IconMessages, IconMoodSmile, IconSend, IconShare, IconThumbUp } from '@tabler/icons'
 import React, { useState } from 'react'
 import useFetch from '../hooks/useFetch';
 
+const useStyles = createStyles((theme) => ({
+  postItem: {
+    background: theme.colorScheme === 'dark' ? "#000" : "#fff",
+    border: theme.colorScheme === 'dark' ? "1px solid #363636" : "1px solid #dbdbdb",
+    borderRadius: "8px",
+    marginTop: "15px",
+  }
+}));
+
 const Post = () => {
+  const { classes, cx } = useStyles();
   const [counter, setCounter] = useState({ like: 10 });
   const [active, setActive] = useState({ like: false });
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const dark = colorScheme === "dark";
   const [userData] = useFetch();
-  const { user, posts } = userData;
+  const { user, data } = userData;
 
-  const handleLike = () => { 
+  const handleLike = () => {
     if (active.like) {
       setCounter({ like: counter.like - 1 });
       setActive({ like: false });
@@ -23,137 +35,77 @@ const Post = () => {
     <>
       <div>
         {
-          posts?.map((post, index) => (
-            <article key={index} className="post-item">
+          data?.map((item, index) => (
+            <article key={index} className={classes.postItem}>
               <Group spacing="sm" className="post-header">
-                <Avatar src={post?.user?.profile_picture} radius="xl" size="lg" />
+                <Avatar src={user?.profile_picture} radius="xl" size="md" />
 
                 <div style={{ flex: 1 }}>
                   <Text size="sm" weight={500}>
-                    {post?.user?.name}
+                    {user?.username}
                   </Text>
 
                   <Text color="dimmed" size="xs">
-                    Yesterday at 11:51 AM
+                    Ordinal Studio
                   </Text>
                 </div>
 
                 {<IconDots size={30} stroke={2} />}
               </Group>
-              <Text className='post-content' size="md">
-                life settlement stable earning with app development ?
-              </Text>
-              <Image src={post?.user?.profile_picture} alt='Post' />
+              <Image src={item?.user?.profile_picture} alt='Post' />
               <div className='post-footer'>
+                <ul className='post-share-list'>
+                  <li onClick={handleLike}>
+                    <IconHeart size={24} />
+                  </li>
+                  <li>
+                    <IconMessageCircle2 size={24} />
+                  </li>
+                  <li>
+                    <IconSend size={24} />
+                  </li>
+                  <li style={{ marginLeft: "auto" }}>
+                    <IconBookmark size={24} />
+                  </li>
+                </ul>
                 <div className='post-like'>
-                  {counter.like} Likes
+                  {counter.like} likes
                 </div>
-                <div className='post-share-list'>
-                  <Grid>
-                    <Grid.Col span={4}>
-                      <Button
-                        fullWidth
-                        variant="subtle"
-                        color="gray"
-                        radius="md"
-                        size="sm"
-                        leftIcon={<IconThumbUp />}
-                        styles={(theme) => ({
-                          root: {
-                            color: active.like ? theme.colors.blue[6] : theme.colors.gray[6],
-                            '&:hover': {
-                              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                            },
-                          },
-                        })}
-                        onClick={handleLike}
-                      >
-                        <MediaQuery query="(max-width: 425px)" styles={{ display: "none" }}>
-                          <Text>
-                            Like
-                          </Text>
-                        </MediaQuery>
-                      </Button>
-                    </Grid.Col>
-                    <Grid.Col span={4}>
-                      <Button
-                        fullWidth
-                        variant="subtle"
-                        color="gray"
-                        radius="md"
-                        size="sm"
-                        leftIcon={<IconMessages />}
-                        styles={(theme) => ({
-                          root: {
-                            '&:hover': {
-                              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                            },
-                          },
-                        })}
-                      >
-                        <MediaQuery query="(max-width: 425px)" styles={{ display: "none" }}>
-                          <Text>
-                            Comment
-                          </Text>
-                        </MediaQuery>
-                      </Button>
-                    </Grid.Col>
-                    <Grid.Col span={4}>
-                      <Button
-                        fullWidth
-                        variant="subtle"
-                        color="gray"
-                        radius="md"
-                        size="sm"
-                        leftIcon={<IconShare />}
-                        styles={(theme) => ({
-                          root: {
-                            '&:hover': {
-                              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                            },
-                          },
-                        })}
-                      >
-                        <MediaQuery query="(max-width: 425px)" styles={{ display: "none" }}>
-                          <Text>
-                            Share
-                          </Text>
-                        </MediaQuery>
-                      </Button>
-                    </Grid.Col>
-                  </Grid>
+                <div className="post-content">
+                  <Text color={dark ? "#fff" : "black"} size="sm" weight={500}>
+                    {user?.username}
+                  </Text>
+                  <Text size="sm" weight={500}>
+                    What do you want to see in our content ?
+                  </Text>
                 </div>
-                <div className="comment-input">
-                  <Group spacing='sm'>
-                    <Avatar component='a' href="/" radius="xl" size={40} src={user?.profile_picture} />
-                    <Input
-                      variant="filled"
-                      placeholder="Write a comment..."
-                      radius="xl"
-                      size="md"
-                      style={{ flexGrow: '1' }}
-                    />
-                  </Group>
+                <Text size="xs" weight={400} style={{ margin: "5px 0" }}>
+                  View All 50 comments
+                </Text>
+                <div className="post-content">
+                  <Text color={dark ? "#fff" : "black"} size="sm" weight={500}>
+                    carinstagram
+                  </Text>
+                  <Text size="sm" weight={500}>
+                    we want the output 🙏🏼
+                  </Text>
                 </div>
-                <div className='comment'>
-                  {
-                    post?.comments?.map((comment, index) => (
-                      <div key={index} className='comment-item'>
-                        <Group spacing='sm'>
-                          <Avatar radius="xl" size={40} src={comment?.user?.profile_picture} />
-                          <div className="comment-text">
-                            <Text color='#fff' weight={500}>
-                              {comment?.user?.name}
-                            </Text>
-                            <Text>
-                              {comment?.text}
-                            </Text>
-                          </div>
-                        </Group>
-                      </div>
-                    ))
+                <Text size={10} style={{ margin: "5px 0" }}>
+                  1 DAY AGO
+                </Text>
+              </div>
+              <div className="post-input">
+                <Input
+                  icon={<IconMoodSmile />}
+                  variant="unstyled"
+                  size="lg"
+                  placeholder="Add a comment.."
+                  rightSection={
+                    <Button color="blue" variant="subtle" size="xs" style={{ right: "15px" }}>
+                      Post
+                    </Button>
                   }
-                </div>
+                />
               </div>
             </article>
           ))
