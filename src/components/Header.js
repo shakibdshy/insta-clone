@@ -85,15 +85,17 @@ function Header() {
                             </a>
                         </Link>
                     </div>
-                    <div>
-                        <Input
-                            icon={<IconSearch />}
-                            variant="filled"
-                            placeholder="Search"
-                            radius="sm"
-                            size="md"
-                        />
-                    </div>
+                    <MediaQuery smallerThan={900} styles={{ display: 'none' }}>
+                        <div>
+                            <Input
+                                icon={<IconSearch />}
+                                variant="filled"
+                                placeholder="Search"
+                                radius="sm"
+                                size="md"
+                            />
+                        </div>
+                    </MediaQuery>
                     <ul className={classes.menu}>
                         {links.map((link, index) => (
                             <li key={index} className={classes.menuList}>
