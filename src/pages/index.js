@@ -1,3 +1,4 @@
+import { Container, Grid, Group } from '@mantine/core'
 import Header from '../components/Header'
 import Post from '../components/Post'
 import PrimarySidebar from '../components/PrimarySidebar'
@@ -7,13 +8,17 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
-        <div>
-          <Story />
-          <Post />
-        </div>
-        {/* <PrimarySidebar /> */}
-      </main>
+      <Container size={856}>
+        <main>
+          <Group align='flex-start'>
+            <div style={{ maxWidth: '470px' }}>
+              <Story />
+              <Post />
+            </div>
+            <PrimarySidebar />
+          </Group>
+        </main>
+      </Container>
     </>
   )
 }
