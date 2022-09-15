@@ -56,7 +56,7 @@ const Post = () => {
               <div className='post-footer'>
                 <ul className='post-share-list'>
                   <li onClick={handleLike}>
-                    <IconHeart size={24} />
+                    <IconHeart size={24} style={{ color: active.like ? "red" : "" }} />
                   </li>
                   <li>
                     <IconMessageCircle2 size={24} />
